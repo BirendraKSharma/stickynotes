@@ -98,7 +98,9 @@
         <!-- Display total number of websites -->
        <ul>
         {% for post in posts %}
-    <li> <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a></li>
+    <li> <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+       <button type="button" style="margin-left:60px; border-radius:15px;" class="effect btn btn-primary">follow</button>
+    </li>
     <p> he is a renowned software engineers.</p>
     {% endfor %}
    </ul>
