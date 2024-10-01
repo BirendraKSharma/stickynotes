@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Ensure the body and html take up the full page */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          /* overflow-x: hidden;
+          overflow-y:hidden; */
+        }
+    
+        /* Full-page background image */
+        .full-background {
+          background-image:linear-gradient(rgb(0,0,0,0.6),rgb(0,0,0,0.6)),url('https://www.shutterstock.com/shutterstock/photos/1974274265/display_1500/stock-photo-let-s-get-started-text-concept-write-on-notebook-with-office-tools-on-wooden-background-1974274265.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position:relative;
+          flex-direction: column; /* Stack items vertically */
+          transition: transform 0.5s ease; 
+          /* overflow: hidden;   */
+        }
+    
+        /* Styling the button */
+        .center-btn {
+      background-color:#007bff;
+      padding: 15px 30px;
+      font-size: 20px;
+      border-radius: 15px;
+      transition: all 0.3s ease; /* Smooth transition for hover effects */
+      border: 2px solid transparent; /* Add border for hover effect */
+    }
+
+    /* Hover effects
+    .center-btn:hover {
+      background-color: #0056b3; /* Darker blue background */
+      /* color: #fff; /* Change text color */
+      /* transform: scale(1.05); Slightly increase size
+      box-shadow: 0 4px 15px rgba(0, 86, 179, 0.4); Floating shadow effect */
+      /* border-color: #007bff; Border color changes
+    } */ 
+    .getstart{
+
+        text-decoration:none;
+        font-family:'Poppins',sans-serif;
+        text-transform:uppercase;
+        font-weight:900;
+        font-size:14px;
+        letter-spacing:1px;
+        display:inline-block;
+        padding:19px 30px;
+        border-radius:50px;
+        margin:10px;
+        border:2px solid #fff;
+        background-color:transparent;
+        color:#fff;
+        cursor: pointer; 
+        transition:0.6s all;
+
+    }
+    .getstart:hover{
+        /* background-color:#0b27a6; */
+        border:2px solid #030e58; 
+        color:#030e58;
+
+    }
+    .btns{
+        margin-top:100px;
+        margin-right:100px;
+        height:90px;
+        font:300;
+    }
+    .text{
+         top:10px;
+         left:40px;
+        position:absolute;
+        color:#fff;
+    }
+    @keyframes swipeUp {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+    .swipe-up {
+            animation: swipeUp 0.3s forwards; /* Play the swipe up animation */
+        }
+      </style>
+</head>
+<body>
+    <div class="full-background">
+<div class="text"> <h1>StickyNotes</h1></div>
+        <div class="btns"><a id="getStartedBtn" href="{% url 'blog-home' %}" class="getstart">Get Started</a></div>
+      </div>
+
+
+      <script>
+        document.getElementById('getStartedBtn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor click behavior
+
+            // Add the swipe-up class to the full-background div
+            const backgroundDiv = document.querySelector('.full-background');
+            backgroundDiv.classList.add('swipe-up');
+
+            // After the animation ends, redirect to the new page
+            backgroundDiv.addEventListener('animationend', function() {
+                window.location.href = "{% url 'blog-home' %}";  // Replace with your actual page URL
+            });
+        });
+    </script>
+    
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
