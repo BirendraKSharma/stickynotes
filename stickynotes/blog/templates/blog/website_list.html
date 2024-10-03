@@ -60,7 +60,6 @@
 }
 
 </style>
-<!--  -->
 <div class="content-section-website">
   <h1>Some Useful Sites</h1>
   <!-- Display total number of websites -->
@@ -77,11 +76,7 @@
       {% endfor %}
   </ul>
 </div>
-<div>
-    <img class="img" src="https://static.vecteezy.com/system/resources/previews/020/811/020/non_2x/job-searching-employment-services-recruitment-agencies-resume-writing-finding-work-vacant-positions-send-your-cv-illustration-free-vector.jpg" alt="">
-</div>
-
-
+{% if posts %}
 <div class="content-section-website">
           <h1>Recommended Topics</h1>
           <div class="container mt-9">
@@ -103,14 +98,13 @@
         <!-- Display total number of websites -->
        <ul>
         {% for post in posts %}
-    <li><a style="height:10px;" class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-        <button type="button" style="margin-left:100px; border-radius:15px;" class="effect btn btn-primary">follow</button>
+    <li> <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+       <button type="button" style="margin-left:60px; border-radius:15px;" class="effect btn btn-primary">follow</button>
     </li>
-      
-    
-    <!-- <p> He is a renowned software engineers.</p> -->
+    <p> he is a renowned software engineers.</p>
     {% endfor %}
    </ul>
 </div>
-
+   
+{% endif %}
   
