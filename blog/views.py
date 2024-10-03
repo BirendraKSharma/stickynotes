@@ -120,6 +120,6 @@ def about(request):
 def website(request):
     return render(request, 'blog/pageweb.html')
 def front(request):
-    return render(request,'blog/front.html')
+    return render(request,"blog/front.html")
 def home(request):
-    return render(request,'blog/home.html')
+    return render(request,'home.html')

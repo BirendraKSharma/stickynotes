@@ -20,5 +20,5 @@ urlpatterns = [
     path("about/", views.about, name="blog-about"),
     path("pageweb/", views.website, name="blog-pageweb"),
     path('upload_image/', ImageUploadView.as_view(), name='upload_image'),
-    path("",views.front, name="front"),
+    path("",views.front,name="front")
 ] 
