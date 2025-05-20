@@ -1,5 +1,4 @@
 import os
-import logging
 from .models import Post, Website
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -9,31 +8,31 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.views import View
+import logging
 
 logger = logging.getLogger(__name__)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ImageUploadView(View):
     def post(self, request, *args, **kwargs):
-        try:
-            image_file = request.FILES.get('file')
-            if image_file:
-                image_name = image_file.name
-                media_directory = os.path.join('media', 'images')
-                image_path = os.path.join(media_directory, image_name)
-
-                # Create directory if it doesn't exist
-                os.makedirs(media_directory, exist_ok=True)
-
-                with open(image_path, 'wb+') as destination:
-                    for chunk in image_file.chunks():
-                        destination.write(chunk)
-                
-                return JsonResponse({'location': f'/media/images/{image_name}'})
-            return JsonResponse({'error': 'No file uploaded'}, status=400)
-        except Exception as e:
-            logger.error("Image upload error: %s", str(e))
-            return JsonResponse({'error': 'Image upload failed'}, status=500)
+        print("ImageUploadView POST request received")
+        
+        # Use Cloudinary storage directly instead of default_storage
+        from cloudinary_storage.storage import MediaCloudinaryStorage
+        cloudinary_storage = MediaCloudinaryStorage()
+        
+        image_file = request.FILES.get('file')
+        if image_file:
+            try:
+                file_path = cloudinary_storage.save(f'images/{image_file.name}', image_file)
+                file_url = cloudinary_storage.url(file_path)
+                print("Uploaded to Cloudinary:", file_url)
+                return JsonResponse({'location': file_url})
+            except Exception as e:
+                print("Cloudinary upload error:", str(e))
+                return JsonResponse({'error': str(e)}, status=500)
+        return JsonResponse({'error': 'No file uploaded'}, status=400)
 
 class PostListView(ListView):
     model = Post
