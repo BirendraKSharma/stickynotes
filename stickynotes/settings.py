@@ -116,7 +116,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': env('CLOUDINARY_API_KEY', default=None),
     'API_SECRET': env('CLOUDINARY_API_SECRET', default=None),
 }
-print("Cloudinary name:", env('CLOUDINARY_CLOUD_NAME'))
 
 
 # Email Configuration
